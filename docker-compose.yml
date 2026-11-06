@@ -1,0 +1,25 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - '3333:3333'
+    volumes:
+      # On first run Docker seeds the volume with the database from the image,
+      # then keeps it across rebuilds. `docker compose down -v` resets it.
+      - db-data:/app/db
+    restart: unless-stopped
+
+  webapp:
+    build:
+      context: .
+      dockerfile: apps/webapp/Dockerfile
+    ports:
+      - '4200:80'
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  db-data:

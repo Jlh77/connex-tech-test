@@ -1,0 +1,7 @@
+{
+  "watch": ["apps/api/src"],
+  "ext": "ts",
+  "ignore": ["**/*.spec.ts", "**/*.test.ts"],
+  "delay": 300,
+  "exec": "tsx apps/api/src/main.ts"
+}
